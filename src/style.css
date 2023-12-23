@@ -36,8 +36,8 @@ a:visited {
 
 .audio {
     position: absolute;
-    bottom: 20px;
-    left: 20px;
+    top: 20px;
+    right: 20px;
     background-color: #1c5f3f;
     border-radius: 10px;
     padding: 10px;
