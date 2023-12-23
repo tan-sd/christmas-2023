@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body,
 html,
 #root {
@@ -14,18 +20,31 @@ html,
 
 #social {
     font-family: "Poppins";
-    font-weight: bold;
     position: absolute;
-    bottom: 0;
-    right: 0;
-    margin: 0px 20px 20px 0px;
+    bottom: 20px;
+    right: 20px;
+    text-align: right;
     user-select: none;
     color: black;
-    /* backdrop-filter: blur(10px) saturate(70%); */
 }
 
 a:link,
 a:visited {
     text-decoration: underline;
-    color: black;
+    color: inherit;
+}
+
+.audio {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: #1c5f3f;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.audio img {
+    width: 30px;
+    height: auto;
 }
