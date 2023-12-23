@@ -1,9 +1,16 @@
 import { useGLTF, Center } from "@react-three/drei";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import christmasAudio from "../public/audio/christmas.mp3";
+import useAudio from "./useAudio";
 
 export function Christmas() {
     const christmas = useGLTF("./model/christmas.glb");
+    const audioRef = useRef(new Audio(christmasAudio));
+    audioRef.current.volume = 0.4;
+    audioRef.current.loop = true;
+
+    const isPlaying = useAudio((state) => state.isPlaying);
 
     const [isOriginalColor, setIsOriginalColor] = useState(true);
 
@@ -45,11 +52,21 @@ export function Christmas() {
         return () => clearInterval(intervalId);
     }, [christmas, isOriginalColor]);
 
+    useEffect(() => {
+        if (isPlaying) {
+            audioRef.current.play();
+        } else {
+            audioRef.current.pause();
+        }
+    }, [isPlaying]);
+
     return (
-        <primitive
-            object={christmas.scene}
-            scale={0.3}
-            position={[0, -1.2, 0]}
-        />
+        <Center>
+            <primitive
+                object={christmas.scene}
+                scale={0.25}
+                position={[0, 0, 0]}
+            />
+        </Center>
     );
 }
