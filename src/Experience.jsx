@@ -2,6 +2,7 @@ import { OrbitControls, PresentationControls } from "@react-three/drei";
 import { Christmas } from "./Christmas";
 import { Perf } from "r3f-perf";
 import Lights from "./Lights";
+import { Snow } from "./Snow";
 
 export default function Experience() {
     return (
@@ -13,8 +14,10 @@ export default function Experience() {
             {/* <Perf position="top-left" /> */}
 
             <PresentationControls>
-                <Christmas />;
+                <Christmas />
             </PresentationControls>
+
+            <Snow />
 
             <Lights />
         </>
