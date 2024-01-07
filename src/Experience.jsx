@@ -19,7 +19,7 @@ export default function Experience() {
 
             <Snow />
 
-            <Lights />
+            {/* <Lights /> */}
         </>
     );
 }
