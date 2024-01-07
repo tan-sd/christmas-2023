@@ -1,4 +1,4 @@
-import { useGLTF, Center } from "@react-three/drei";
+import { useGLTF, Center, useTexture } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import christmasAudio from "../public/audio/christmas.mp3";
@@ -6,6 +6,7 @@ import useAudio from "./useAudio";
 
 export function Christmas() {
     const christmas = useGLTF("./model/christmas.glb");
+    const texture = useTexture("./texture/christmasBaked.jpg");
     const audioRef = useRef(new Audio(christmasAudio));
     audioRef.current.volume = 0.4;
     audioRef.current.loop = true;
@@ -43,6 +44,15 @@ export function Christmas() {
                     color: colorToUse,
                 });
             }
+
+            if (
+                child.isMesh &&
+                (child.name.startsWith("stage") ||
+                    child.name.startsWith("star") ||
+                    child.name.startsWith("ear"))
+            ) {
+                child.material.side = THREE.DoubleSide;
+            }
         });
 
         const intervalId = setInterval(() => {
@@ -59,6 +69,16 @@ export function Christmas() {
             audioRef.current.pause();
         }
     }, [isPlaying]);
+
+    texture.flipY = false;
+
+    texture.encoding = THREE.sRGBEncoding;
+
+    christmas.scene.traverse((child) => {
+        if (child.isMesh) {
+            child.material = new THREE.MeshBasicMaterial({ map: texture });
+        }
+    });
 
     return (
         <Center>
